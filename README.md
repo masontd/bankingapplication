@@ -12,6 +12,7 @@ Three open accounts are specified using in-memory data structures in app.py, whe
 To run this application and its tests, proceed as follows -
 
 Steps:
+
 -Run Docker Desktop
 
 -Clone this repository onto your machine and navigate to its directory.
