@@ -12,9 +12,9 @@ Three open accounts are specified using in-memory data structures in app.py, whe
 To run this application and its tests, proceed as follows -
 
 Steps:
-Run Docker Desktop
-Clone this repository onto your machine and navigate to its directory.
-Run the command "docker-compose up"
+-Run Docker Desktop
+-Clone this repository onto your machine and navigate to its directory.
+-Run the command "docker-compose up"
 
 Two things will then happen:
 1. The PyTest tests will execute in alphabetical order by file in the tests directory. Each file corresponds to a unique endpoint (specified in app.py). Within each file, you can read the comments above each test for information about what each test does. The output will be displayed in the command line as dots next to each of the test files (a dot represents successful test execution).
