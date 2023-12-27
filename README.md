@@ -13,7 +13,9 @@ To run this application and its tests, proceed as follows -
 
 Steps:
 -Run Docker Desktop
+
 -Clone this repository onto your machine and navigate to its directory.
+
 -Run the command "docker-compose up"
 
 Two things will then happen:
