@@ -11,26 +11,6 @@ data = {
     '7529366':{'name':'Ellen Johnson', 'balance': 120355}    
 }
 
-@app.route("/")
-def hello_world():
-    return "<p>Hello, World!</p>"
-
-class DemoApiEndpoint(Resource):
-    def __init__(self):
-        self.post_args = reqparse.RequestParser()
-        self.post_args.add_argument("id",
-                                    type=str,
-                                    help="You must include a name string with this post request.",
-                                    required=True)
-
-    def post(self):
-        args = self.post_args.parse_args()
-        name = args['name']
-        return {
-            "message": f'Nice to meet you, {name}!'
-        }
-
-
 class getBalance(Resource):
     def __init__(self):
         self.get_args = reqparse.RequestParser()
@@ -122,7 +102,6 @@ class Withdraw(Resource):
                 "message": 'Withdrawal of {} successful. Your balance is now {}.'.format(amount, data[user_id]['balance'])
             }      
 
-api.add_resource(DemoApiEndpoint, "/api/DemoApiEndpoint")
 api.add_resource(Deposit, "/api/Deposit")
 api.add_resource(Withdraw, "/api/Withdraw")
 api.add_resource(getBalance, "/api/getBalance")

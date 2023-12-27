@@ -1,0 +1,14 @@
+version: '2.4'
+services:
+        pythontests:
+                    container_name: pytests
+                    command: python3 -m pytest
+                    build:
+                        context: .
+                        dockerfile: Dockerfile
+        pythonserver:
+                    container_name: pythonserver
+                    command: python3 app.py
+                    build:
+                        context: .
+                        dockerfile: Dockerfile

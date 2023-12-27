@@ -6,17 +6,16 @@
 # EXPOSE 3000
 # CMD python ./app.py
 
-From ubuntu
+FROM ubuntu:latest
 
 RUN apt update
 RUN apt install python3-pip -y
 RUN pip3 install Flask flask_restful
+RUN pip3 install pytest
 
 WORKDIR /app
 
-COPY . .
+COPY . /app
 
-# EXPOSE 3000
 
-# CMD python ./app.py
-CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0"]
+
