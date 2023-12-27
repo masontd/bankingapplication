@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, Response
 from flask_restful import Api, Resource, reqparse
 
 app = Flask(__name__)
@@ -42,6 +42,8 @@ class getBalance(Resource):
     def get(self):
         args = self.get_args.parse_args()
         user_id = args['id']
+        if (user_id not in data.keys()):
+            return Response ('id not found', status=400, mimetype='application/json')
         return {
             "message": 'Hello, {}! Your balance is {}.'.format(data[user_id]['name'], data[user_id]['balance'])
         }
@@ -62,16 +64,19 @@ class Deposit(Resource):
     def post(self):
         args = self.post_args.parse_args()
         user_id = args['id']
-        print("here2")
         if (user_id not in data.keys()):
-            return {
-                "message": 'id not found.'
-            }            
-        amount = int(args['amount'])
+            return Response ('id not found', status=400, mimetype='application/json')
+        
+        if (args['amount'].startswith('+') or args['amount'].startswith('-')):
+            return Response ('Do not enter + or - before the integer.', status=400, mimetype='application/json')
+        
+        try:
+            amount = int(args['amount'])
+        except:
+            return Response ('You must enter an integer for the amount (no dollar sign)', status=400, mimetype='application/json')
+        
         if (amount > 10000):
-            return {
-                "message": 'You cannot deposit more than $10,000 in a single transaction.'
-            }
+            return Response ('You cannot deposit more than $10,000 in a single transaction.', status=400, mimetype='application/json')
         else:
             data[user_id]['balance'] += amount       
             return {
@@ -95,19 +100,22 @@ class Withdraw(Resource):
         user_id = args['id']
 
         if (user_id not in data.keys()):
-            return {
-                "message": 'id not found.'
-            }            
-        amount = int(args['amount'])
+            return Response ('id not found', status=400, mimetype='application/json')
+        
+        if (args['amount'].startswith('+') or args['amount'].startswith('-')):
+            return Response ('Do not enter + or - before the integer.', status=400, mimetype='application/json')
+        
+        try:
+            amount = int(args['amount'])
+        except:
+            return Response ('You must enter an integer for the amount (no dollar sign)', status=400, mimetype='application/json')
+
+
         balance = data[user_id]['balance']
         if (amount > (balance*.9)):
-            return {
-                "message": 'You cannot withdraw more than 90 percent of your account balance in a single transaction.'
-            }
+            return Response ('You cannot withdraw more than 90 percent of your account balance in a single transaction.', status=400, mimetype='application/json')
         elif (balance-amount < 100):
-            return {
-                "message": 'You cannot have less than $100 in your account at any point.'
-            }            
+            return Response ('You cannot have less than $100 in your account at any point.', status=400, mimetype='application/json')
         else:
             data[user_id]['balance'] -= amount       
             return {
