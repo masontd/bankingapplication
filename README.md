@@ -23,21 +23,21 @@ Two things will then happen:
 1. The PyTest tests will execute in alphabetical order by file in the tests directory. Each file corresponds to a unique endpoint (specified in app.py). Within each file, you can read the comments above each test for information about what each test does. The output will be displayed in the command line as dots next to each of the test files (a dot represents successful test execution).
 2. The server will begin running on port 5000 of your machine, which you can then interact with using applications like Postman. Here are the endpoints and their expected payloads:
 
-http://localhost:5000/api/getBalance
+http://localhost:5000/api/getBalance (GET)
 
 {
     "id": ""
 }
 
 
-http://localhost:5000/api/Deposit
+http://localhost:5000/api/Deposit (POST)
 
 {
     "id": "", "amount": ""
 }
 
 
-http://localhost:5000/api/Withdraw
+http://localhost:5000/api/Withdraw (POST)
 
 {
     "id": "", "amount": ""
